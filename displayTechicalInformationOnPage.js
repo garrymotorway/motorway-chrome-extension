@@ -9,18 +9,15 @@ window.onload = () => {
         return;
     }
 
-    let done = false;
+    const exponentialBackoffTMilliseconds = (interval, rate, iteration) => 1000 * interval * rate ** iteration;
+    let iteration = 0;
     const tryToDisplayTechicalInformationOnPage = () => {
-        if (done) return;
-        Array.from(document.getElementsByClassName('development')).forEach((element) => {
+        console.log('try')
+        const elements = Array.from(document.getElementsByClassName('development'));
+        elements.forEach((element) => {
             element.classList.remove('development');
         });
+        setTimeout(tryToDisplayTechicalInformationOnPage, exponentialBackoffTMilliseconds(0.5, 1.3, ++iteration));
     }
-
-    // Try 5 times to display dev data and give async operations time to complete
-    setTimeout(tryToDisplayTechicalInformationOnPage, 1000);
-    setTimeout(tryToDisplayTechicalInformationOnPage, 2000);
-    setTimeout(tryToDisplayTechicalInformationOnPage, 3000);
-    setTimeout(tryToDisplayTechicalInformationOnPage, 5000);
-    setTimeout(tryToDisplayTechicalInformationOnPage, 8000);
+    tryToDisplayTechicalInformationOnPage();
 };
