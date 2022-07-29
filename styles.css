@@ -1,0 +1,7 @@
+button {
+    font-family: NewTransport,helvetica,arial,sans-serif;
+    font-weight: 700;
+    background: #fef200;
+    border: solid 1px black;
+    width: 200px;
+}
