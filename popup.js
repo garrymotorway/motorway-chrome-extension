@@ -1,14 +1,35 @@
-showFeaturesMenu.addEventListener("click", async () => {
+const toggleCookie = (cookieName) => {
     chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
-        (tabs) => {
-            chrome.cookies.set({
-                name: 'mwDisplayFeaturesManager',
+    async (tabs) => {
+        if (!tabs?.length || !tabs[0].url) {
+            return;
+        }
+        const current = await chrome.cookies.get({
+            name: cookieName,
+            url: tabs[0].url
+        });
+        if (current?.value) {
+            await chrome.cookies.remove({
+                name: cookieName,
+                url: tabs[0].url
+            });
+        }
+        else {
+            await chrome.cookies.set({
+                name: cookieName,
                 value: 'true',
                 url: tabs[0].url
             });
-            document.cookie="mwDisplayFeaturesManager=true; path=/";
-            chrome.tabs.reload(tabs[0].id)
-            // window.location.reload();
         }
-    );
+        chrome.tabs.reload(tabs[0].id)
+    }
+);
+}
+
+displayFeaturesManager.addEventListener("click", async () => {
+    toggleCookie('mwDisplayFeaturesManager');
+});
+
+displayTechicalInformationOnPage.addEventListener("click", async () => {
+    toggleCookie('mwDisplayTechicalInformationOnPage');
 });

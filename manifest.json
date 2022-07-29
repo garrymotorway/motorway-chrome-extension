@@ -3,10 +3,10 @@
     "description": "Motorway Chrome Extension with various useful functionality",
     "version": "1.0",
     "manifest_version": 3,
-    "permissions": ["scripting", "cookies"],
+    "permissions": ["scripting", "cookies", "activeTab"],
     "host_permissions": [
-        "*://*.motorway.co.uk/",
-        "*://localhost:*/"
+        "*://*.motorway.co.uk/*",
+        "*://localhost:*/*"
     ],
     "action": {
         "default_popup": "popup.html"
@@ -18,5 +18,15 @@
         "16": "images/icon16.png",
         "48": "images/icon48.png",
         "128": "images/icon128.png"
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.motorway.co.uk/",
+                "http://localhost:*/*"
+            ],
+            "js": ["displayTechicalInformationOnPage.js"],
+            "run_at": "document_end"
+        }
+    ]
 }
