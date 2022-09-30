@@ -17,3 +17,8 @@ To run locally
 The extension is setup to run on all `localhost` URLs and anything with *motorway.co.uk domains.
 
 It periodically checks the page for any elements with a CSS class of `development`. When one is found it will try and show this element. This periodic checking only happens if the toggle is on.
+
+# Feature
+* Toggle features manager - allows you to turn on/off front end feature toggles.
+* Toggle technical information on page - allows you to see IDs etc on dashboard.
+* Get agent token - gives you an agent token you can use for backend postman requests.

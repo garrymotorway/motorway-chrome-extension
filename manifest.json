@@ -25,7 +25,9 @@
                 "*://*.motorway.co.uk/",
                 "http://localhost:*/*"
             ],
-            "js": ["displayTechicalInformationOnPage.js"],
+            "js": [
+                "index.js"
+            ],
             "run_at": "document_end"
         }
     ]
